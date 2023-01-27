@@ -22,12 +22,23 @@ export const AddBlog = () => {
         likes: 0
     });
 
+    const [errors, setErrors] = useState({
+        titleError: "",
+        descriptionError: ""
+    })
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(inputs)
-        actions.addBlog(inputs);
+        if (inputs.description.length < 40){
+            setErrors({descriptionError: "Length of description should be atleast 40"})
+            return errors
+        }
+        else {
+            actions.addBlog(inputs);
+        }
         console.log(actions.listBlog)
-        navigate("/")
+        navigate("/blog-react-redux-context")
     }
 
     const dispatch = useDispatch();
@@ -36,25 +47,27 @@ export const AddBlog = () => {
 
     return (
         <div className="container">
-            <button className="btn btn-primary" onClick={() => navigate(-1)}>Back</button>
+            <br />
+            <button className="btn btn-light my-3" onClick={() => navigate('/blog-react-redux-context')}>Back</button>
             <h3 className="my-5">Add Blog</h3>
             <form onSubmit={handleSubmit}>
             <div className="mb-3">
                 <label for="exampleFormControlInput1" className="form-label">Title</label>
-                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Learn Python" onChange={
+                <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Learn Python" required onChange={
                 ({target}) => setInputs(state => ({...state, title:target.value}))
                 } 
                 value={inputs.title || ""} />
                 </div>
             <div className="mb-3">
                 <label for="exampleFormControlTextarea1" className="form-label">Description</label>
-                <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" onChange={
+                <textarea className="form-control" id="exampleFormControlTextarea1" rows="7" required minLength={40} onChange={
                 ({target}) => setInputs(state => ({...state, description:target.value}))
                 } 
                 value={inputs.description || ""}></textarea>
+                <span className="error">{errors.descriptionError}</span>
             </div>
             <div className="mb-3">
-                <button type="submit" onSubmit={handleSubmit} className="btn btn-primary">Add Blog</button>
+                <button type="submit" onSubmit={handleSubmit} className="btn btn-dark">Add Blog</button>
             </div>
             </form>
         </div>

@@ -35,7 +35,7 @@ export const BlogList = () => {
                     <br />
                         <p>{blog.description}</p>
                     </div>
-                    <Link to={`/blogs/${blog.id}`}><button type="button" className="btn btn-light">Read More...</button></Link>
+                    <Link to={`/blog-react-redux-context/blogs/${blog.id}`}><button type="button" className="btn btn-light">Read More...</button></Link>
                     <button className="btn btn-light mx-3" onClick={() => deleteBlog(blog.id)}>Delete</button>
                 </li>
                 )})}

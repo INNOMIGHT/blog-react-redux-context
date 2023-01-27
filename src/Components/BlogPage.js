@@ -25,7 +25,7 @@ export const BlogPage = () => {
 
     const editBlog = (id) => {
         actions.deleteBlog(selectedBlog.id)
-        navigate(`/blogs/${id}/edit`)
+        navigate(`/blog-react-redux-context/blogs/${id}/edit`)
     }
 
 
@@ -34,7 +34,7 @@ export const BlogPage = () => {
     return (
         <div className="container">
             <br />
-            <Link to="/"><button className="btn btn-light"> All Blogs</button></Link>
+            <Link to="/blog-react-redux-context"><button className="btn btn-light"> All Blogs</button></Link>
             <br />
             <br/>
             <h3>{selectedBlog.title}</h3>
